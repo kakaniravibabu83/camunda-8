@@ -3,6 +3,9 @@ com\example\camunda\dto\DeploymentRequest.class
 com\example\camunda\service\DeploymentService.class
 com\example\camunda\controller\BpmnDeploymentController.class
 com\example\camunda\controller\DmnDeploymentController.class
+com\example\camunda\dto\ProcessInstanceRequest.class
+com\example\camunda\dto\ProcessInstanceResponse.class
 com\example\camunda\PaymentWorker$PaymentResult.class
 com\example\camunda\dto\DeploymentResponse.class
 com\example\camunda\PaymentWorker.class
+com\example\camunda\controller\ProcessInstanceController.class

@@ -2,8 +2,11 @@ package com.example.camunda.service;
 
 import com.example.camunda.dto.DeploymentRequest;
 import com.example.camunda.dto.DeploymentResponse;
+import com.example.camunda.dto.ProcessInstanceRequest;
+import com.example.camunda.dto.ProcessInstanceResponse;
 import io.camunda.client.CamundaClient;
 import io.camunda.client.api.response.DeploymentEvent;
+import io.camunda.client.api.response.ProcessInstanceEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +72,58 @@ public class DeploymentService {
                     request.getDeploymentName(),
                     "FAILED",
                     "Failed to deploy DMN model: " + e.getMessage(),
+                    500,
+                    e.getClass().getName() + ": " + e.getMessage()
+            );
+        }
+    }
+
+    public ProcessInstanceResponse startProcessInstance(ProcessInstanceRequest request) {
+        try {
+            io.camunda.client.api.command.FinalCommandStep<io.camunda.client.api.response.ProcessInstanceEvent> command;
+
+            if (request.getVersion() != null) {
+                if (request.getVariables() != null && !request.getVariables().isEmpty()) {
+                    command = camundaClient.newCreateInstanceCommand()
+                            .bpmnProcessId(request.getBpmnProcessId())
+                            .version(request.getVersion())
+                            .variables(request.getVariables());
+                } else {
+                    command = camundaClient.newCreateInstanceCommand()
+                            .bpmnProcessId(request.getBpmnProcessId())
+                            .version(request.getVersion());
+                }
+            } else {
+                if (request.getVariables() != null && !request.getVariables().isEmpty()) {
+                    command = camundaClient.newCreateInstanceCommand()
+                            .bpmnProcessId(request.getBpmnProcessId())
+                            .latestVersion()
+                            .variables(request.getVariables());
+                } else {
+                    command = camundaClient.newCreateInstanceCommand()
+                            .bpmnProcessId(request.getBpmnProcessId())
+                            .latestVersion();
+                }
+            }
+
+            ProcessInstanceEvent processInstanceEvent = command.execute();
+
+            return new ProcessInstanceResponse(
+                    String.valueOf(processInstanceEvent.getProcessInstanceKey()),
+                    processInstanceEvent.getBpmnProcessId(),
+                    processInstanceEvent.getVersion(),
+                    "SUCCESS",
+                    "Process instance started successfully",
+                    200,
+                    null
+            );
+        } catch (Exception e) {
+            return new ProcessInstanceResponse(
+                    null,
+                    request.getBpmnProcessId(),
+                    request.getVersion(),
+                    "FAILED",
+                    "Failed to start process instance: " + e.getMessage(),
                     500,
                     e.getClass().getName() + ": " + e.getMessage()
             );
