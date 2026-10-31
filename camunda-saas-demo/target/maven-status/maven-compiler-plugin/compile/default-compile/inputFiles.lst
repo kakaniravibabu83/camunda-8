@@ -1,9 +1,12 @@
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\CamundaApplication.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\controller\BpmnDeploymentController.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\controller\DmnDeploymentController.java
+C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\controller\DmnEvaluationController.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\controller\ProcessInstanceController.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\DeploymentRequest.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\DeploymentResponse.java
+C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\DmnEvaluationRequest.java
+C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\DmnEvaluationResponse.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\ProcessInstanceRequest.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\dto\ProcessInstanceResponse.java
 C:\camunda\camunda8\camunda-saas-demo\src\main\java\com\example\camunda\PaymentWorker.java

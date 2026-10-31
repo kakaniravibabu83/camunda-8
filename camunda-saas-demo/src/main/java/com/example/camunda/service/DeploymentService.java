@@ -4,22 +4,29 @@ import com.example.camunda.dto.DeploymentRequest;
 import com.example.camunda.dto.DeploymentResponse;
 import com.example.camunda.dto.ProcessInstanceRequest;
 import com.example.camunda.dto.ProcessInstanceResponse;
+import com.example.camunda.dto.DmnEvaluationRequest;
+import com.example.camunda.dto.DmnEvaluationResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.camunda.client.CamundaClient;
 import io.camunda.client.api.response.DeploymentEvent;
 import io.camunda.client.api.response.ProcessInstanceEvent;
+import io.camunda.client.api.response.EvaluateDecisionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @Service
 public class DeploymentService {
 
     private final CamundaClient camundaClient;
+    private final ObjectMapper objectMapper;
 
     @Autowired
     public DeploymentService(CamundaClient camundaClient) {
         this.camundaClient = camundaClient;
+        this.objectMapper = new ObjectMapper();
     }
 
     public DeploymentResponse deployBpmnModel(DeploymentRequest request) {
@@ -124,6 +131,36 @@ public class DeploymentService {
                     request.getVersion(),
                     "FAILED",
                     "Failed to start process instance: " + e.getMessage(),
+                    500,
+                    e.getClass().getName() + ": " + e.getMessage()
+            );
+        }
+    }
+
+    public DmnEvaluationResponse evaluateDmnDecision(DmnEvaluationRequest request) {
+        try {
+            EvaluateDecisionResponse decisionEvaluation = camundaClient.newEvaluateDecisionCommand()
+                    .decisionId(request.getDecisionId())
+                    .variables(request.getVariables())
+                    .execute();
+
+            String decisionOutputJson = decisionEvaluation.getDecisionOutput();
+            Map<String, Object> result = objectMapper.readValue(decisionOutputJson, Map.class);
+
+            return new DmnEvaluationResponse(
+                    request.getDecisionId(),
+                    result,
+                    "SUCCESS",
+                    "DMN decision evaluated successfully",
+                    200,
+                    null
+            );
+        } catch (Exception e) {
+            return new DmnEvaluationResponse(
+                    request.getDecisionId(),
+                    null,
+                    "FAILED",
+                    "Failed to evaluate DMN decision: " + e.getMessage(),
                     500,
                     e.getClass().getName() + ": " + e.getMessage()
             );
