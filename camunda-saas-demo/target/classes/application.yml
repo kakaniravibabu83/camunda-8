@@ -1,0 +1,20 @@
+# https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
+# https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
+
+camunda:
+  client:
+    mode: saas
+    cluster-id: fadf63fd-3427-45f3-90b0-7043f79f7fa4
+    region: sin-2
+    auth:
+      client-id: dINrVA2enKobHLZjHUDzNeN-Gusz1JCb
+      client-secret: U35YW90lgsk8WVgUnTxtfVim7_0DVH7S.QP9UGWrA9Sx4cz5LKwp140w7sCcBLex
+    operate:
+      base-url: https://sin-2.operate.camunda.io/fadf63fd-3427-45f3-90b0-7043f79f7fa4
+    optimize:
+      base-url: https://sin-2.optimize.camunda.io/fadf63fd-3427-45f3-90b0-7043f79f7fa4
+    tasklist:
+      base-url: https://sin-2.tasklist.camunda.io/fadf63fd-3427-45f3-90b0-7043f79f7fa4
+#    zeebe:
+#      gateway-url: https://sin-2.zeebe.camunda.io/fadf63fd-3427-45f3-90b0-7043f79f7fa4
+#      base-url: https://sin-2.zeebe.camunda.io/fadf63fd-3427-45f3-90b0-7043f79f7fa4

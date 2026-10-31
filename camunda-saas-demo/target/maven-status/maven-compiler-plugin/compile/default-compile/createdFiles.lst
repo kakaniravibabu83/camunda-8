@@ -1,0 +1,8 @@
+com\example\camunda\CamundaApplication.class
+com\example\camunda\dto\DeploymentRequest.class
+com\example\camunda\service\DeploymentService.class
+com\example\camunda\controller\BpmnDeploymentController.class
+com\example\camunda\controller\DmnDeploymentController.class
+com\example\camunda\PaymentWorker$PaymentResult.class
+com\example\camunda\dto\DeploymentResponse.class
+com\example\camunda\PaymentWorker.class

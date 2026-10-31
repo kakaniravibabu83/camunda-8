@@ -1,6 +1,6 @@
 package com.example.camunda;
 
-import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.client.CamundaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -12,10 +12,10 @@ import java.util.Map;
 public class CamundaApplication  {
 //implements CommandLineRunner
     private static final Logger LOG = LoggerFactory.getLogger(CamundaApplication.class);
-    private final ZeebeClient zeebeClient;
+    private final CamundaClient camundaClient;
 
-    public CamundaApplication(ZeebeClient zeebeClient) {
-        this.zeebeClient = zeebeClient;
+    public CamundaApplication(CamundaClient camundaClient) {
+        this.camundaClient = camundaClient;
     }
 
     public static void main(String[] args) {
