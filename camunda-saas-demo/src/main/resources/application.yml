@@ -19,6 +19,8 @@ camunda:
       base-url: https://sin-2.optimize.camunda.io/61a183c9-5baf-4bef-9911-22eca411049b
     tasklist:
       base-url: https://sin-2.api.camunda.io/61a183c9-5baf-4bef-9911-22eca411049b
+    orchestration:
+      base-url: https://sin-2.api.camunda.io/61a183c9-5baf-4bef-9911-22eca411049b/v2
 #    zeebe:
 #      gateway-url: https://sin-2.zeebe.camunda.io/61a183c9-5baf-4bef-9911-22eca411049b
 #      base-url: https://sin-2.zeebe.camunda.io/61a183c9-5baf-4bef-9911-22eca411049b
