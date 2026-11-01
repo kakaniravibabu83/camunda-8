@@ -17,10 +17,10 @@ public class PaymentWorker {
     @JobWorker(type = "process-payment")
     public PaymentResult processPayment(@Variable String orderId, @Variable Double amount) {
         LOG.info("Processing payment for order: {} for ${}", orderId, amount);
-        
+
         boolean isSuccess = amount != null && amount > 0;
         String transactionId = UUID.randomUUID().toString();
-        
+
         LOG.info("Payment successful: {}, Transaction ID: {}", isSuccess, transactionId);
         return new PaymentResult(isSuccess, transactionId);
     }
